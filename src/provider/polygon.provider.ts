@@ -1,8 +1,8 @@
 import axios from "axios";
-import { GWEI_UNIT } from "@/constants/units";
-import { GasPrice } from "@/types/types";
+import { GWEI_UNIT } from "../constants/units";
+import { GasPrice } from "../types/types";
 
-type TxSpeedOptions = "safeLow" | "standard" | "fast" | "fast" | "fastest";
+type TxSpeedOptions = "safeLow" | "standard" | "fast" | "fastest";
 
 interface PolygonGasStationResponse {
   safeLow: number;
@@ -36,21 +36,3 @@ export default class PolygonProvider {
     }
   }
 }
-
-const paramsOverrides = {};
-const getPrice = async () => {
-  const gasPriceService = await new PolygonProvider();
-  const gasPrice = await gasPriceService.getLatest();
-
-  if (gasPrice != null) {
-    if (gasPrice.maxPriorityFeePerGas != null) {
-      paramsOverrides["maxFeePerGas"] = gasPrice.maxFeePerGas;
-      paramsOverrides["maxPriorityFeePerGas"] = gasPrice.maxPriorityFeePerGas;
-    } else {
-      paramsOverrides["gasPrice"] = gasPrice.price;
-    }
-  }
-  console.log(paramsOverrides);
-};
-
-getPrice();
