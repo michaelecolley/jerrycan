@@ -16,7 +16,8 @@ interface PolygonGasStationResponse {
 export default class PolygonProvider {
   /**
    *
-   * Returns the gas price recommendations from the Polygon Mainnet gas price recommendation service
+   * Returns the gas price recommendations via GET request from the Polygon Mainnet gas price recommendation service
+   * For more information about the service visit the site [here](https://docs.polygon.technology/docs/develop/tools/polygon-gas-station/)
    *
    * @param TxSpeedOptions String value that corresponds to the keys in the TxSpeedOptions type
    * @returns An estmation in GWei based on a default
