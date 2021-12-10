@@ -1,4 +1,4 @@
-import PolygonProvider from "../src/provider/polygon.provider";
+import PolygonProvider from "../src/providers/polygon.provider";
 
 describe("Testing the Polygon Gas Service", () => {
   describe("Function", () => {

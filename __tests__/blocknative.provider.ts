@@ -1,4 +1,4 @@
-import BlockNativeProvider from "../src/provider/blocknative.provider";
+import BlockNativeProvider from "../src/providers/blocknative.provider";
 import * as nock from "nock";
 import { spyConsole } from "./spyConsole";
 
