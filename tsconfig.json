@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // TODO: Check if all compiler options are necessary
     "target": "esnext",
     "experimentalDecorators": true,
     "module": "esnext",
