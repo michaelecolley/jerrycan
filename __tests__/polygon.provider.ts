@@ -1,4 +1,5 @@
 import PolygonProvider from "../src/providers/polygon.provider";
+import { testPayload } from "./testPayloads";
 import { spyConsole } from "./spyConsole";
 const nock = require("nock");
 describe("Testing the Polygon Gas Service", () => {
@@ -7,7 +8,7 @@ describe("Testing the Polygon Gas Service", () => {
     const url = "https://gasstation-mainnet.matic.network";
 
     beforeAll(async () => {
-      const scope = nock(url).get("/").reply(200, testPayload);
+      const scope = nock(url).get("/").reply(200, testPayload.polygon);
       const gasPriceService = await new PolygonProvider();
       gasPrice = await gasPriceService.getLatest();
     });
@@ -45,12 +46,3 @@ describe("Testing the Polygon Gas Service", () => {
     });
   });
 });
-
-const testPayload = {
-  safeLow: 36,
-  standard: 50,
-  fast: 228,
-  fastest: 228,
-  blockTime: 2,
-  blockNumber: 22376333,
-};

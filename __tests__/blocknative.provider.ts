@@ -1,4 +1,5 @@
 import BlockNativeProvider from "../src/providers/blocknative.provider";
+import { testPayload } from "./testPayloads";
 import { spyConsole } from "./spyConsole";
 const nock = require("nock");
 
@@ -12,7 +13,7 @@ describe("Check the BlockNative Gas Service", () => {
         .matchHeader("authorization", process.env.VUE_APP_BLOCKNATIVE_DAPP_ID)
         .matchHeader("user-agent", "axios/0.21.1")
         .get("/gasprices/blockprices")
-        .reply(200, testPayload);
+        .reply(200, testPayload.blocknative);
       let gasPriceService = await new BlockNativeProvider();
       gasPrice = await gasPriceService.getLatest();
     });
@@ -55,51 +56,3 @@ describe("Check the BlockNative Gas Service", () => {
     });
   });
 });
-
-const testPayload = {
-  system: "ethereum",
-  network: "main",
-  unit: "gwei",
-  maxPrice: 161,
-  currentBlockNumber: 13780724,
-  msSinceLastBlock: 3503,
-  blockPrices: [
-    {
-      blockNumber: 13780725,
-      estimatedTransactionCount: 57,
-      baseFeePerGas: 101.364384469,
-      estimatedPrices: [
-        {
-          confidence: 99,
-          price: 103,
-          maxPriorityFeePerGas: 2,
-          maxFeePerGas: 204.73,
-        },
-        {
-          confidence: 95,
-          price: 102,
-          maxPriorityFeePerGas: 1.52,
-          maxFeePerGas: 204.25,
-        },
-        {
-          confidence: 90,
-          price: 102,
-          maxPriorityFeePerGas: 1.5,
-          maxFeePerGas: 204.23,
-        },
-        {
-          confidence: 80,
-          price: 102,
-          maxPriorityFeePerGas: 1.27,
-          maxFeePerGas: 204,
-        },
-        {
-          confidence: 70,
-          price: 102,
-          maxPriorityFeePerGas: 1.07,
-          maxFeePerGas: 203.8,
-        },
-      ],
-    },
-  ],
-};
