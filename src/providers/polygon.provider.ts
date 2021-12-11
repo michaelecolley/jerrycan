@@ -32,7 +32,7 @@ export default class PolygonProvider {
       );
       return { price: data[txSpeed] * GWEI_UNIT };
     } catch (error) {
-      console.log("[Polygon] Gas Platform Error", error);
+      console.error("[Polygon] Gas Platform Error", error);
       return null;
     }
   }

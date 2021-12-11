@@ -1,40 +1,41 @@
-import BlockNativeProvider from "../src/provider/blocknative.provider";
-import * as nock from "nock";
+import BlockNativeProvider from "../src/providers/blocknative.provider";
+import { testPayload } from "./testPayloads";
 import { spyConsole } from "./spyConsole";
+const nock = require("nock");
 
 describe("Check the BlockNative Gas Service", () => {
   describe("Check happy path functionality", () => {
-    let testObject = {};
     let gasPrice;
+    const url = "https://api.blocknative.com";
     beforeAll(async () => {
+      const scope = await nock(url)
+        .matchHeader("accept", "application/json, text/plain, */*")
+        .matchHeader("authorization", process.env.VUE_APP_BLOCKNATIVE_DAPP_ID)
+        .matchHeader("user-agent", "axios/0.21.1")
+        .get("/gasprices/blockprices")
+        .reply(200, testPayload.blocknative);
       let gasPriceService = await new BlockNativeProvider();
       gasPrice = await gasPriceService.getLatest();
-      if (gasPrice != null) {
-        testObject["maxFeePerGas"] = gasPrice.maxFeePerGas;
-        testObject["maxPriorityFeePerGas"] = gasPrice.maxPriorityFeePerGas;
-        testObject["gasPrice"] = gasPrice.price;
-      }
     });
     it("Test that the returned Object from the getLatest call is not null", () => {
       expect(gasPrice).not.toBeNull();
     });
 
-    it("Test getLatest ensuring it returns a single key value pair: the price and a number more than 0", () => {
+    it("Test getLatest ensuring it returns the target key value pairs and they evaluate to positive numbers", () => {
       for (const property of [
-        "gasPrice",
+        "price",
         "maxPriorityFeePerGas",
         "maxFeePerGas",
       ]) {
-        expect(testObject).toHaveProperty(property);
-        expect(typeof testObject[property]).toBe("number");
-        expect(testObject[property] > 0).toBe(true);
+        expect(gasPrice).toHaveProperty(property);
+        expect(typeof gasPrice[property]).toBe("number");
+        expect(gasPrice[property] > 0).toBe(true);
       }
     });
     it("Test that the number of keys returned is 3 on the returned object", () => {
-      expect(Object.keys(testObject).length).toBe(3);
+      expect(Object.keys(gasPrice).length).toBe(3);
     });
   });
-
   describe("Check error handling", () => {
     let gasPrice;
     const spy = spyConsole();
