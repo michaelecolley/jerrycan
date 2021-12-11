@@ -17,7 +17,6 @@ describe("Testing the Polygon Gas Service", () => {
       });
       const gasPriceService = await new PolygonProvider();
       gasPrice = await gasPriceService.getLatest();
-      console.log(gasPrice);
     });
     it("Returned Object is not null", async () => {
       expect(gasPrice).not.toBeNull();
