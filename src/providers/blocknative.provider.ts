@@ -39,6 +39,13 @@ export default class BlocknativeProvider {
    * @returns A gas price estmation in GWei
    *
    */
+  private apiKey = process.env.VUE_APP_BLOCKNATIVE_DAPP_ID;
+  constructor(userProvidedApiKey?: string) {
+    if (userProvidedApiKey !== undefined) {
+      this.apiKey = userProvidedApiKey;
+    }
+  }
+
   public async getLatest(
     confidence: BlocknativeGasPriceConfidence | "best" = "best"
   ): Promise<GasPrice | null> {
@@ -47,12 +54,11 @@ export default class BlocknativeProvider {
         "https://api.blocknative.com/gasprices/blockprices",
         {
           headers: {
-            Authorization: process.env.VUE_APP_BLOCKNATIVE_DAPP_ID,
+            Authorization: this.apiKey,
           },
         }
       );
       const estimatedPrices = response.data.blockPrices[0].estimatedPrices;
-
       let gasPrice: BlocknativeEstimatedPrice | undefined;
 
       // try to get 90% confidence, but make sure not to overpay. (otherwise grab 70%)
