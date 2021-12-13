@@ -1,8 +1,8 @@
-import axios from "axios";
-import { GWEI_UNIT } from "../constants/units";
-import { GasPrice } from "../types/types";
+import axios from 'axios';
+import { GWEI_UNIT } from '../constants/units';
+import { GasPrice } from '../types/types';
 
-type TxSpeedOptions = "safeLow" | "standard" | "fast" | "fastest";
+type TxSpeedOptions = 'safeLow' | 'standard' | 'fast' | 'fastest';
 
 interface PolygonGasStationResponse {
   safeLow: number;
@@ -24,15 +24,15 @@ export default class PolygonProvider {
    *
    */
   public async getLatest(
-    txSpeed: TxSpeedOptions = "standard"
+    txSpeed: TxSpeedOptions = 'standard'
   ): Promise<GasPrice | null> {
     try {
       const { data } = await axios.get<PolygonGasStationResponse>(
-        "https://gasstation-mainnet.matic.network"
+        'https://gasstation-mainnet.matic.network'
       );
       return { price: data[txSpeed] * GWEI_UNIT };
     } catch (error) {
-      console.error("[Polygon] Gas Platform Error", error);
+      console.error('[Polygon] Gas Platform Error', error);
       return null;
     }
   }
