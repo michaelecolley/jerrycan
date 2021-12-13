@@ -1,5 +1,6 @@
 import BlocknativeProvider from './providers/blocknative.provider';
 import PolygonProvider from './providers/polygon.provider';
+import EthGasStationProvider from './providers/ethGasStation.provider';
 import { GasPrice } from './types/types';
 
 export default class GasPriceService {
@@ -16,6 +17,7 @@ export default class GasPriceService {
     private readonly blocknativeProvider = new BlocknativeProvider(
       blockNativeProvidedApiKey
     ),
+    private readonly ethGasStationProvider = new EthGasStationProvider(),
     private readonly polygonProvider = new PolygonProvider()
   ) {}
 
@@ -26,6 +28,8 @@ export default class GasPriceService {
         return await this.blocknativeProvider.getLatest();
       case 'blocknative':
         return await this.blocknativeProvider.getLatest();
+      case 'ethGasStation':
+        return await this.ethGasStationProvider.getLatest();
       case '137':
         return await this.polygonProvider.getLatest();
       case 'polygon':
