@@ -6,7 +6,7 @@
 
 ## 🤨 What is Jerrycan?
 
-Jerrycan is an ethereum gas api service aggregator that allows you to have a single interface for multiple gas estimation api service.
+Jerrycan is an ethereum gas api service aggregator that allows you to have a single interface for multiple gas estimation api services.
 
 ## 🛠 Installation
 
