@@ -1,4 +1,4 @@
-# 🔥 Jerrycan - Ethereum Gas API service aggregator
+# 🔥 Jerrycan - Ethereum Gas api service aggregator
 
 ## 🛠 Installation
 
