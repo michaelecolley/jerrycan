@@ -26,6 +26,5 @@ console.log(result);
 
 ## 🥨 Supported apis
 
-Blocknative
 [Polygon](https://gasstation-mainnet.matic.network)
 [Blocknative](https://docs.blocknative.com/gas-platform)
