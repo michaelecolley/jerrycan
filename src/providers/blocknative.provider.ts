@@ -82,7 +82,6 @@ export default class BlocknativeProvider {
           estimatedPrice => estimatedPrice.confidence === confidence
         );
       }
-      console.log('blocknative fires', gasPrice);
       // gas price is in gwei
       if (gasPrice != null) {
         return {

@@ -13,7 +13,7 @@ describe('Check the BlockNative Gas Service', () => {
         .matchHeader('authorization', process.env.VUE_APP_BLOCKNATIVE_DAPP_ID)
         .matchHeader('user-agent', 'axios/0.21.1')
         .get('/gasprices/blockprices')
-        .reply(200, testPayload.blocknative);
+        .reply(200, testPayload.BlockNativeProvider);
       let gasPriceService = await new BlockNativeProvider();
       gasPrice = await gasPriceService.getLatest();
     });

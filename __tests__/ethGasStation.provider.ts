@@ -1,15 +1,21 @@
-import PolygonProvider from '../src/providers/polygon.provider';
+import EthGasStationProvider from '../src/providers/ethGasStation.provider';
 import { testPayload } from './testPayloads.util';
 import { spyConsole } from './spyConsole.util';
+require('dotenv').config();
 const nock = require('nock');
-describe('Testing the Polygon Gas Service', () => {
+
+describe('Testing the Eth Gas Station Service', () => {
   describe('Check class functionality', () => {
     let gasPrice;
-    const url = 'https://gasstation-mainnet.matic.network';
+    const url = `https://ethgasstation.info`;
 
     beforeAll(async () => {
-      const scope = nock(url).get('/').reply(200, testPayload.PolygonProvider);
-      const gasPriceService = await new PolygonProvider();
+      const scope = nock(url)
+        .matchHeader('accept', 'application/json, text/plain, */*')
+        .matchHeader('user-agent', 'axios/0.21.1')
+        .get(`/api/ethgasAPI.json?api-key=${process.env.DEFI_PULSE_API}`)
+        .reply(200, testPayload.EthGasStationProvider);
+      const gasPriceService = await new EthGasStationProvider();
       gasPrice = await gasPriceService.getLatest();
     });
     it('Returned Object is not null', async () => {
@@ -34,11 +40,11 @@ describe('Testing the Polygon Gas Service', () => {
     });
 
     it("Test that correct error is thrown when service can't connect to external API", async () => {
-      let gasPriceService = await new PolygonProvider();
+      let gasPriceService = await new EthGasStationProvider();
       gasPrice = await gasPriceService.getLatest();
       expect(console.error).toHaveBeenCalledTimes(1);
       expect(spy.console['mock']['calls'][0]).toContain(
-        '[Polygon] Gas Platform Error'
+        '[Eth Gas Station] Platform Error'
       );
     });
     it('Test that null is returned from gasPrice variable when no API call is successfully made', async () => {
