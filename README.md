@@ -4,6 +4,10 @@
   <img alt="npm version" src="https://img.shields.io/npm/v/jerrycan" />
 </p>
 
+## 🤨 What is Jerrycan?
+
+Jerrycan is an ethereum gas api service aggregator that allows you to have a single interface for multiple gas estimation api service.
+
 ## 🛠 Installation
 
 Head to your target project and type in:
