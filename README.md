@@ -3,7 +3,7 @@
 <p align="center">
   <img alt="npm version" src="https://img.shields.io/npm/v/jerrycan" />
   <img alt="Last commit" src="https://img.shields.io/github/last-commit/michaelecolley/jerrycan" />
-  <img alt="Github stars" src="https://shields.io/github/stars/oslabs-beta/jerrycan" />
+  <img alt="Github stars" src="https://shields.io/github/stars/michaelecolley/jerrycan" />
   <img alt="Snyk" src="https://snyk.io/advisor/npm-package/jerrycan/badge.svg" href='https://snyk.io/advisor/npm-package/jerrycan' />
 </p>
 
