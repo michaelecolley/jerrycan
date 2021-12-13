@@ -8,7 +8,7 @@ describe('Testing the Polygon Gas Service', () => {
     const url = 'https://gasstation-mainnet.matic.network';
 
     beforeAll(async () => {
-      const scope = nock(url).get('/').reply(200, testPayload.polygon);
+      const scope = nock(url).get('/').reply(200, testPayload.PolygonProvider);
       const gasPriceService = await new PolygonProvider();
       gasPrice = await gasPriceService.getLatest();
     });
