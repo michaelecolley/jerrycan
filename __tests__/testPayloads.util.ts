@@ -1,8 +1,8 @@
 export const testPayload = {
   blocknative: {
-    system: "ethereum",
-    network: "main",
-    unit: "gwei",
+    system: 'ethereum',
+    network: 'main',
+    unit: 'gwei',
     maxPrice: 161,
     currentBlockNumber: 13780724,
     msSinceLastBlock: 3503,

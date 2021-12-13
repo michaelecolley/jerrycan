@@ -8,10 +8,10 @@ export function spyConsole() {
    *
    */
   let spy = {
-    console: {},
+    console: {}
   };
   beforeEach(() => {
-    spy.console = jest.spyOn(console, "error").mockImplementation(() => {});
+    spy.console = jest.spyOn(console, 'error').mockImplementation(() => {});
   });
   return spy;
 }
