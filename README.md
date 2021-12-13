@@ -19,9 +19,9 @@ import { GasPriceService } from 'jerrycan';
 
 const gasPrice = new GasPriceService();
 
-const result = gasPrice.getLatest('polygon'); // { price: 41000000000 }
+const result = gasPrice.getLatest('polygon');
 
-console.log(result);
+console.log(result); // { price: 41000000000 }
 ```
 
 ## 🥨 Supported apis
