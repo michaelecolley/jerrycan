@@ -16,8 +16,8 @@
       "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
     },
     "modulePathIgnorePatterns": [
-      "__tests__/spyConsole.ts",
-      "__tests__/testPayloads.ts"
+      "__tests__/spyConsole.util.ts",
+      "__tests__/testPayloads.util.ts"
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!variables/.*)"
@@ -38,9 +38,8 @@
     "typedoc": "^0.22.10",
     "typescript": "^4.5.3",
     "prettier": "^2.5.1",
-    "nock": "^13.2.1"
-  },
-  "dependencies": {
+    "nock": "^13.2.1",
     "dotenv": "^10.0.0"
-  }
+  },
+  "dependencies": {}
 }
