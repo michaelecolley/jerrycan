@@ -1,7 +1,7 @@
 import PolygonProvider from '../src/providers/polygon.provider';
 import { testPayload } from './testPayloads.util';
 import { spyConsole } from './spyConsole.util';
-const nock = require('nock');
+import nock from 'nock';
 describe('Testing the Polygon Gas Service', () => {
   describe('Check class functionality', () => {
     let gasPrice;
