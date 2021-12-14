@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import axios from 'axios';
 import { GWEI_UNIT } from '../constants/units';
 import { GasPrice } from '../types/types';
@@ -39,13 +37,14 @@ export default class BlocknativeProvider {
    * @returns A gas price estmation in GWei
    *
    */
-  private apiKey = process.env.VUE_APP_BLOCKNATIVE_DAPP_ID;
-
-  constructor(userProvidedApiKey?: string) {
-    if (userProvidedApiKey !== undefined) {
-      this.apiKey = userProvidedApiKey;
+  constructor(blocknativeApiKey?: string | null) {
+    if (blocknativeApiKey == undefined)
+      console.error('Please pass in a valid Blocknative api key');
+    else {
+      this.apiKey = blocknativeApiKey;
     }
   }
+  private apiKey;
 
   public async getLatest(
     confidence: BlocknativeGasPriceConfidence | 'best' = 'best'
@@ -82,7 +81,6 @@ export default class BlocknativeProvider {
           estimatedPrice => estimatedPrice.confidence === confidence
         );
       }
-      console.log('blocknative fires', gasPrice);
       // gas price is in gwei
       if (gasPrice != null) {
         return {
