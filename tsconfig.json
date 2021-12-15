@@ -15,23 +15,13 @@
     "baseUrl": ".",
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "types": ["node", "@types/jest", "@/constants/units"],
+    "types": ["node", "@types/jest"],
     "typeRoots": ["../../node_modules/@types", "./src/@types"],
 
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "jest.config.ts"
-  ],
-  "exclude": ["node_modules"],
-  "typedocOptions": {
-    "entryPoints": ["src/index.ts"],
-    "out": "docs"
-  }
+  "include": ["*.ts", "src/**/*.ts", "tests/**/*.ts", "jest.config.ts"],
+  "exclude": ["node_modules"]
 }

@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import axios from 'axios';
 import { GWEI_UNIT } from '../constants/units';
 import { GasPrice } from '../types/types';
@@ -30,26 +28,23 @@ type BlocknativeGasPlatformResponse = {
 };
 
 export default class BlocknativeProvider {
-  /**
-   *
-   * Returns the gas price recommendations via GET request from the Blocknative gas platform API
-   * For more information about the service visit the site [here](https://docs.blocknative.com/gas-platform/)
-   *
-   * @param confidence String value that corresponds to the callers BlocknativeGasPriceConfidence preference
-   * @returns A gas price estmation in GWei
-   *
-   */
-  private apiKey = process.env.VUE_APP_BLOCKNATIVE_DAPP_ID;
-
-  constructor(userProvidedApiKey?: string) {
-    if (userProvidedApiKey !== undefined) {
-      this.apiKey = userProvidedApiKey;
-    }
+  constructor(blocknativeApiKey?: string | null) {
+    this.apiKey = blocknativeApiKey;
   }
+  private apiKey;
 
   public async getLatest(
     confidence: BlocknativeGasPriceConfidence | 'best' = 'best'
   ): Promise<GasPrice | null> {
+    /**
+     *
+     * Returns the gas price recommendations via GET request from the Blocknative gas platform API
+     * For more information about the service visit the site [here](https://docs.blocknative.com/gas-platform/)
+     *
+     * @param confidence String value that corresponds to the callers BlocknativeGasPriceConfidence preference
+     * @returns A gas price estmation in GWei
+     *
+     */
     try {
       const response = await axios.get<BlocknativeGasPlatformResponse>(
         'https://api.blocknative.com/gasprices/blockprices',
@@ -82,7 +77,6 @@ export default class BlocknativeProvider {
           estimatedPrice => estimatedPrice.confidence === confidence
         );
       }
-      console.log('blocknative fires', gasPrice);
       // gas price is in gwei
       if (gasPrice != null) {
         return {
