@@ -1,6 +1,9 @@
 # 🔥 Jerrycan - Ethereum Gas api service aggregator
 
 <p align="center">
+<img align="center" src="https://raw.githubusercontent.com/michaelecolley/jerrycan/main/assets/jerrycan.png">
+
+<p align="center">
   <img alt="npm version" src="https://img.shields.io/npm/v/jerrycan" />
 </p>
 
