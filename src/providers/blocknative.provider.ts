@@ -28,27 +28,23 @@ type BlocknativeGasPlatformResponse = {
 };
 
 export default class BlocknativeProvider {
-  /**
-   *
-   * Returns the gas price recommendations via GET request from the Blocknative gas platform API
-   * For more information about the service visit the site [here](https://docs.blocknative.com/gas-platform/)
-   *
-   * @param confidence String value that corresponds to the callers BlocknativeGasPriceConfidence preference
-   * @returns A gas price estmation in GWei
-   *
-   */
   constructor(blocknativeApiKey?: string | null) {
-    if (blocknativeApiKey == undefined)
-      console.error('Please pass in a valid Blocknative api key');
-    else {
-      this.apiKey = blocknativeApiKey;
-    }
+    this.apiKey = blocknativeApiKey;
   }
   private apiKey;
 
   public async getLatest(
     confidence: BlocknativeGasPriceConfidence | 'best' = 'best'
   ): Promise<GasPrice | null> {
+    /**
+     *
+     * Returns the gas price recommendations via GET request from the Blocknative gas platform API
+     * For more information about the service visit the site [here](https://docs.blocknative.com/gas-platform/)
+     *
+     * @param confidence String value that corresponds to the callers BlocknativeGasPriceConfidence preference
+     * @returns A gas price estmation in GWei
+     *
+     */
     try {
       const response = await axios.get<BlocknativeGasPlatformResponse>(
         'https://api.blocknative.com/gasprices/blockprices',
