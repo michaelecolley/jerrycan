@@ -50,7 +50,7 @@ gasPrice = new gasPriceService({ blocknativeApiKey, ethGasStationApiKey });
 
 ```
 
-2. Afterwards you will need to pass in two arguments to the `getLatest()` method. First pass in the Ethereum chain id and then either 'POLYGON', 'ETHGASSTATION' or 'BLOCKNATIVE' depending on which provider you want to fetch data from. This will then return the latest price in GWei.
+2. Afterwards you will need to pass in two arguments to the `getLatest()` method. First pass in the Ethereum chain id as a string (e.g. `'1'` for the Ethereum Mainnet) and then either `'POLYGON'`, `'ETHGASSTATION'` or `'BLOCKNATIVE'` depending on which provider you want to fetch data from. This will then return the latest price in GWei.
 
 ❓ Note - If you mix and match chain id and provider incorrectly the service will return `null`.
 
