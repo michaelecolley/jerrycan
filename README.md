@@ -8,6 +8,12 @@
 
 Jerrycan is an ethereum gas api service aggregator that allows you to have a single interface for multiple gas estimation api services.
 
+## 🥨 Supported apis
+
+[Blocknative](https://docs.blocknative.com/gas-platform)
+[EthGasStation](https://docs.ethgasstation.info/)
+[Polygon](https://gasstation-mainnet.matic.network)
+
 ## 🛠 Installation
 
 Head to your target project and type in:
@@ -16,23 +22,44 @@ Head to your target project and type in:
 
 ## 🪛 Getting started
 
-Getting started is easy. You import the GasPriceService, setting up a new GasPriceService class.
+Getting started is easy.
 
-When you do this if you are using the Blocknative api you will need to pass in your api key into the instantiated object - GasPriceService.
-
-Following this you can pass in either 'polygon' or 'blocknative' on the getLatest method. This will then return the latest price in GWei
+1. You'll need to import the GasPriceService, setting up a new GasPriceService class. If you'd like to use a provider that requires an API (Blocknative or EthGasStation) you'll need to pass in a `blocknativeApiKey` and/or `ethGasStationApiKey` (no api is required when instantiating a new GasPriceService for Polygon):
 
 ```
+// Blocknative
+
+const blocknativeApiKey = 'example';
+let gasPrice = new gasPriceService({ blocknativeApiKey });
+
+or
+
+// EthGasStation
+
+const ethGasStationApiKey = 'example';
+gasPrice = new gasPriceService({ ethGasStationApiKey });
+
+or
+
+// Both
+
+gasPrice = new gasPriceService({ blocknativeApiKey, ethGasStationApiKey });
+
+```
+
+2. Afterwards you will need to pass in two arguments to the `getLatest()` method. First pass in the Ethereum chain id and then either 'POLYGON', 'ETHGASSTATION' or 'BLOCKNATIVE' depending on which provider you want to fetch data from. This will then return the latest price in GWei.
+
+❓ Note - If you mix and match chain id and provider incorrectly the service will return `null`.
+
+```
+// Sample use with Blocknative
+
 import { GasPriceService } from 'jerrycan';
 
-const gasPrice = new GasPriceService();
+const blocknativeApiKey = 'example';
+const gasPrice = new GasPriceService({blocknativeApiKey});
 
-const result = gasPrice.getLatest('polygon');
+const result = gasPrice.getLatest('1','BLOCKNATIVE');
 
 console.log(result); // { price: 41000000000 }
 ```
-
-## 🥨 Supported apis
-
-[Polygon](https://gasstation-mainnet.matic.network)
-[Blocknative](https://docs.blocknative.com/gas-platform)
