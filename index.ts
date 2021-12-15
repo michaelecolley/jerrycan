@@ -1,3 +1,3 @@
-import GasPriceService from './src/gasPriceService';
+import GasPriceService from './src/gas-price-service';
 
 export { GasPriceService };

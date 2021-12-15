@@ -1,14 +1,14 @@
 import PolygonProvider from '../src/providers/polygon.provider';
 import { testPayload } from './testPayloads.util';
 import { spyConsole } from './spyConsole.util';
-import nock from 'nock';
+const nock = require('nock');
 describe('Testing the Polygon Gas Service', () => {
   describe('Check class functionality', () => {
     let gasPrice;
     const url = 'https://gasstation-mainnet.matic.network';
 
     beforeAll(async () => {
-      const scope = nock(url).get('/').reply(200, testPayload.PolygonProvider);
+      const scope = nock(url).get('/').reply(200, testPayload.polygon);
       const gasPriceService = await new PolygonProvider();
       gasPrice = await gasPriceService.getLatest();
     });

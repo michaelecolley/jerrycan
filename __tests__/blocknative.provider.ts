@@ -1,7 +1,7 @@
 import BlockNativeProvider from '../src/providers/blocknative.provider';
 import { testPayload } from './testPayloads.util';
 import { spyConsole } from './spyConsole.util';
-import nock from 'nock';
+const nock = require('nock');
 
 describe('Check the BlockNative Gas Service', () => {
   describe('Check happy path functionality', () => {
@@ -10,14 +10,13 @@ describe('Check the BlockNative Gas Service', () => {
     beforeAll(async () => {
       const scope = await nock(url)
         .matchHeader('accept', 'application/json, text/plain, */*')
-        .matchHeader('authorization', 'testApiKey')
+        .matchHeader('authorization', process.env.VUE_APP_BLOCKNATIVE_DAPP_ID)
         .matchHeader('user-agent', 'axios/0.21.1')
         .get('/gasprices/blockprices')
-        .reply(200, testPayload.BlockNativeProvider);
-      let gasPriceService = await new BlockNativeProvider('testApiKey');
+        .reply(200, testPayload.blocknative);
+      let gasPriceService = await new BlockNativeProvider();
       gasPrice = await gasPriceService.getLatest();
     });
-
     it('Test that the returned Object from the getLatest call is not null', () => {
       expect(gasPrice).not.toBeNull();
     });
