@@ -19,21 +19,21 @@ interface EthGasStationResponse {
 }
 
 export default class EthGasStationProvider {
-  /**
-   *
-   * Returns the gas price recommendations via GET request from the Defi Pulse Eth Gas Station price recommendation service
-   * For more information about the service visit the site [here](https://docs.ethgasstation.info/gas-price)
-   *
-   * @param TxSpeedOptions String value that corresponds to the keys in the TxSpeedOptions type
-   * @returns An estmation in GWei based on a default
-   *
-   */
   constructor(ethGasApiKey?: string | null) {
     this.apiKey = ethGasApiKey;
   }
   private apiKey;
 
   public async getLatest(
+    /**
+     *
+     * Returns the gas price recommendations via GET request from the Defi Pulse Eth Gas Station price recommendation service
+     * For more information about the service visit the site [here](https://docs.ethgasstation.info/gas-price)
+     *
+     * @param TxSpeedOptions String value that corresponds to the keys in the TxSpeedOptions type
+     * @returns An estmation in GWei based on a default
+     *
+     */
     txSpeed: TxSpeedOptions = 'average'
   ): Promise<GasPrice | null> {
     try {
